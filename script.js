@@ -1,3 +1,5 @@
+'use strict';
+
 function handleFormSubmit(event) {
     event.preventDefault();
     
