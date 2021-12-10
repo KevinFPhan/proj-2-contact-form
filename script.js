@@ -7,6 +7,7 @@ function handleFormSubmit(event) {
     const formJSON = Object.fromEntries(data.entries());   
     const results = document.querySelector('.results pre');
     results.innerText = JSON.stringify(formJSON, null, 2);
+    console.log(formJSON);
 }
   
 const form = document.querySelector('form');
@@ -20,6 +21,7 @@ const errorMsg = document.getElementsByClassName('error');
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     validation(username, 0, "Username cannot be blank!");
+    validation(message, 2, "Message cannot be blank!");
     if (email.value === '') {
         errorMsg[1].innerHTML = "Email cannot be blank!";
     } else if (!isEmail(email.value)) {
@@ -27,7 +29,6 @@ form.addEventListener('submit', (e) => {
     } else {
         errorMsg[1].innerHTML = '';
     }
-    validation(message, 2, "Message cannot be blank!");
 })
 
 form.addEventListener('submit', handleFormSubmit);
