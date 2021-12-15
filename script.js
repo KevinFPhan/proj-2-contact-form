@@ -1,7 +1,7 @@
 'use strict';
 
 function handleFormSubmit(event) {
-    event.preventDefault();
+    
     
     const data = new FormData(event.target);   
     const formJSON = Object.fromEntries(data.entries());   
@@ -19,12 +19,25 @@ const errorMsg = document.getElementsByClassName('error');
 
 
 form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    validation(username, 0, "Username cannot be blank!");
-    validation(message, 2, "Message cannot be blank!");
+    if (username.value === '') {
+        e.preventDefault();
+        errorMsg[0].innerHTML = "Username cannot be blank"
+    } else {
+        errorMsg[0].innerHTML = '';
+    }
+    
+    if (message.value === '') {
+        e.preventDefault();
+        errorMsg[2].innerHTML = "Message cannot be blank!"
+    } else {
+        errorMsg[2].innerHTML = '';
+    }
+    
     if (email.value === '') {
+        e.preventDefault();
         errorMsg[1].innerHTML = "Email cannot be blank!";
     } else if (!isEmail(email.value)) {
+        e.preventDefault();
         errorMsg[1].innerHTML = "Email is not valid!"; 
     } else {
         errorMsg[1].innerHTML = '';
@@ -33,13 +46,6 @@ form.addEventListener('submit', (e) => {
 
 form.addEventListener('submit', handleFormSubmit);
 
-let validation = (id, serial, message) => {
-    if (id.value.trim() === '') {
-        errorMsg[serial].innerHTML = message;
-    } else {
-        errorMsg[serial].innerHTML = '';
-    }
-}
 
 
 
